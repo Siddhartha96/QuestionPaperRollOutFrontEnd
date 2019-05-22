@@ -1,0 +1,54 @@
+  h5{
+    color: aliceblue;
+  }
+  bor{
+    border-right: 2px solid rebeccapurple; 
+  }
+  
+.bg
+{
+    background-image: url("/assets/1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:92.4vh;
+    margin-top:-3%;
+    margin-left:-3%;
+    margin-right: -1%;
+}
+  .bg1{
+      background-color:rgb(8, 8, 8,0.5);
+      background-size: cover;
+      border-radius: 20px;
+      background-image: "/assests/background.jpg";
+  }
+  /* .alig{
+    margin:10px 10px 10px 10px;
+   
+  } */
+  .allign{
+    float:right;
+  }
+  .table-fixed thead {
+    width: 97%;
+  }
+  .table-fixed tbody {
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+  }
+  .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+    display: block;
+  }
+  .table-fixed tbody td, .table-fixed thead > tr> th {
+    float: left;
+    border-bottom-width: 0;
+  }
+  .my-custom-scrollbar {
+position: relative;
+width:370px;
+height: 500px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}

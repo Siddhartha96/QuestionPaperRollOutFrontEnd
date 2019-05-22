@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-5 col-md-offset-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Book the Flight</div>
+      <div class="panel-body">
+        
+          <form class="form-group" [formGroup]="bookingForm" (ngSubmit)="book()">
+
+            <label>Passenger Name:</label>
+            <input type="text" formControlName="passengerName" class="form-control" >
+              <div class="text-danger" *ngIf="bookingForm.controls.passengerName.dirty && bookingForm.controls.passengerName.invalid"> 
+                <span *ngIf="bookingForm.controls.passengerName.hasError('required') && bookingForm.controls.passengerName.hasError('checkName')" 
+                      class="text-danger">The name should contain only characters and use expantion for initials
+
+                  </span>
+              </div>
+            
+            <label>Number of Tickets:</label>
+            <input type="number" step="1" class="form-control" formControlName="noOfTickets" name="" id="">
+                
+            <div class="text-danger" *ngIf="bookingForm.controls.noOfTickets.dirty && bookingForm.controls.noOfTickets.invalid">
+                   <span *ngIf="bookingForm.controls.noOfTickets.hasError('min')
+                                " class="text-danger">
+                                Enter the number of tickets greater than 0
+                                </span>
+                              </div>  
+              
+          <div formGroupName="flights"> 
+                <label for="" > Flight id:</label>
+                   <input type="text" class="form-control" formControlName="flightId" name="" id="">
+                   <div class="text-danger" *ngIf="bookingForm.controls.flights.controls.flightId.dirty && bookingForm.controls.flights.controls.flightId.invalid">
+                      <span class="text-danger" *ngIf="bookingForm.controls.flights.controls.flightId.hasError('required') 
+                        && bookingForm.controls.flights.controls.flightId.hasError('pattern')"></span>
+                     </div>
+          </div>
+               
+            <button type="submit" class="btn btn-primary" [disabled]="bookingForm.invalid">Book</button> 
+         
+          </form>
+         
+          
+      
+
+        <!-- Write the code for form here -->
+        <!-- should use the bootstrap classes form, form-group, form-control -->
+        <!-- use error-message class for displaying field leval error messages -->
+        
+        <div *ngIf="errorMessage!=null">
+          <span class="text-danger">{{errorMessage}}</span>
+        </div>
+        <div *ngIf="bookingId!=null">
+          <span class="text-success">{{bookingId|successMessagePipe}}</span>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

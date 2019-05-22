@@ -1,0 +1,81 @@
+<style>
+    .navbar-default{
+    background-color: rgb(8, 111, 129); 
+}
+.navbar-default .navbar-brand,div>ul>li>a{
+    color: wheat;
+  }
+  .navbar{
+      border:none;
+  }
+</style>
+
+<div class="container-fluid" >
+   <nav class="navbar navbar-default row">
+    <div class="navbar-header col-md-3">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" 
+      data-target="#mynav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+       </button>
+     <a href="" class="navbar-brand">QP Tracker</a>
+     </div>
+     <div class="collapse navbar-collapse col-md-2 col-md-offset-6 tt" id="mynav-collapse" *ngIf="this.servee.navShow">
+       <ul class="nav navbar-nav">
+            <li >
+                <a [routerLink]="['/home']">Home</a></li>
+           
+            <li><a [routerLink]="['/contact']">Contacts</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+         
+            <li><a [routerLink]="['/login']">Login</a></li>
+            
+            
+        </ul>
+        
+        </div>
+        <!-- <ng-container  *ngIf="!this.servee.navShow && categ=='QPEditor'; then qp " ></ng-container>
+        <ng-container  *ngIf="!this.servee.navShow && categ=='Reviewer'|| categ=='ETA'; then qp1 " ></ng-container> -->
+        
+        <!-- <ng-template #qp> -->
+        <div class="collapse navbar-collapse col-md-4 col-md-offset-4 tt" id="mynav-collapse"  *ngIf="!this.servee.navShow">
+                <ul class="nav navbar-nav">
+                     <li >
+                         <a [routerLink]="['/home']">Home</a></li>
+                    
+                     <li><a [routerLink]="['/home']">Contacts</a></li>
+                     <!-- <li><a href="#" [routerLink]="['/newqp']">Create New Qp</a></li> 
+                     <li><a href="#" [routerLink]="['/qpeditor']">Edit Existing Qp</a></li> -->
+                     <li><a (click)= "logout()" [routerLink]="['/home']">Logout</a></li>
+                 </ul>
+               
+                  
+                    
+                     
+          
+                 
+        </div>
+    <!-- </ng-template> -->
+    <!-- <ng-template #qp1>
+        <div class="collapse navbar-collapse col-md-4 col-md-offset-6 tt" id="mynav-collapse" *ngIf="!this.servee.navShow && (categ=='ETA' || categ=='Reviewer')">
+            <ul class="nav navbar-nav">
+                 <li >
+                     <a [routerLink]="['/home']">Home</a></li>
+                
+                 <li><a [routerLink]="['/home']">Contacts</a></li>
+                
+                 <li><a (click)= "logout()" [routerLink]="['/home']">Logout</a></li>
+                 </ul>                             
+         </div>
+    </ng-template> -->
+    </nav>
+    </div>
+<br>
+<div class="container-fluid">
+    <router-outlet></router-outlet><!-- Keep the tag of routing -->
+</div>
+<div>
+        <app-footer></app-footer>
+</div>

@@ -1,0 +1,171 @@
+
+
+  <div class="container-fluid bg" style="">
+      <!-- sort and search -->
+      <!-- <div class="row" style="margin:30px 0 10px 10%;" >
+        <form action="" class="form-group">
+          <div class="col-md-2 col-md-offset-1">
+             
+              <select name="" id="" class="form-control">
+                <option value="">---Sort By---</option> 
+                <option value="date">Date</option>
+                <option value="month">Month</option>
+              </select>
+              
+            </div>
+            <div class="col-md-2 col-md-offset-1">
+                <input type="text" class="form-control" placeholder="SEARCH">
+            </div>
+        </form>
+       
+      </div> -->
+
+      <!--Display Qp details in tabular format  -->
+
+      
+  
+      <div class="row" style="margin-top:80px;">     
+  
+        <div class="col-md-3 col-md-offset-1">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-responsive" style="color:rgb(11, 27, 41);height:10vh;background-color:rgb(245, 222, 179,0.5);border-radius:5px; margin-left:5px">
+              <thead>
+                <div class="input-group" style="margin:3px;width:132%">
+                  
+                    <input  type="hidden" name="search_param" value="all" id="search_param">         
+                    <input  type="text" class="form-control" [(ngModel)]="search1" name="x" placeholder="Search term...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit" (click)="search()"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+              </div>
+              </thead>
+              <thead>
+                  <tr>
+                      <th>QPID</th>
+                      <th>QPNAME</th>
+                    
+                  </tr>
+                </thead>     
+                <tbody *ngIf="searchCounter==false">
+                  
+                  <tr *ngFor="let i of qpData1" >
+                    <td><button type="submit" class="btn btn-link" style="color:rgb(11, 27, 41);" (click)="show(i)">{{i.qpId}}</button></td>
+                    <td>{{i.qpName}}</td>
+                  </tr> 
+                  <tr *ngIf="!qpData1 || qpData1.length==0">
+                      <td colspan="2">No Files Found</td>
+                  </tr>      
+                </tbody>
+                <tbody *ngIf="searchCounter==true">
+                  
+                  <tr *ngFor="let i of searchedQp" >
+                    <td><button type="submit" class="btn btn-link" style="color:rgb(11, 27, 41);" (click)="show(i)">{{i.qpId}}</button></td>
+                    <td>{{i.qpName}}</td>
+                  </tr> 
+                  <tr *ngIf="!searchedQp || searchedQp.length==0">
+                      <td colspan="2">No Files Found</td>
+                  </tr>      
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!--Download and Upload-->
+        <div *ngIf="showdetails" class="col-md-3 col-md-offset-1" style="color:rgb(11, 27, 41);background-color:rgb(245, 222, 179,0.5);border-radius:5px;padding:20px 20px 30px 20px">
+          <label for="">QP ID:</label>{{qpData2.qpId}}
+          <br><br>
+          <label for="">QP Name:</label>{{qpData2.qpName}}
+          <br>
+          <br>
+          <button type="button" class="btn btn-primary btn-sm alig" (click)="download_qp(qpData2.qpId)">
+              <span class="glyphicon glyphicon-download-alt" ></span> Download
+          </button>
+          
+          <button type="button" class="btn btn-primary btn-sm alig" style="margin-left:33%" (click)="showUploadForm()">
+                <span class="glyphicon glyphicon-upload"></span> Upload
+          </button>
+
+        </div>
+        
+        <!-- Update Existing Qp -->
+        <div *ngIf="uploadQpForm" class="col-md-3 col-md-offset-1" style="color:rgb(11, 27, 41);background-color:rgb(245, 222, 179,0.5);border-radius:5px;padding:20px 20px 20px 20px">
+          <form [formGroup]="updateForm" class="form-group">
+            <label for="">QpId</label>
+            <select name="" id="" formControlName="qpId" class="form-control" >
+              <option value="">---Select QpId---</option>
+              <option *ngFor="let qpid of qpData3">{{qpid.qpId}}</option>
+            </select>
+            <!-- <label for="">QpName</label>
+            <select name="" id="" formControlName="qpName" class="form-control" style="margin-left:3%">
+              <option value="">---Select QpId---</option>
+              <option *ngFor="let qpname of qpData3">{{qpname.qpName}}</option>
+            </select> -->
+            <br>
+            <input type="file" class="form-control alig" formControlName="path">
+            <br>
+            <button type="button" class="btn btn-primary btn-sm" style="margin-left:33%" (click)='updateQp()'>
+              <span class="glyphicon glyphicon-upload"></span> Upload
+        </button>
+        <br> <div *ngIf="errorMessage!=null">
+            <span class="text-danger">{{errorMessage}}</span>
+          </div>
+          <div *ngIf="successMessage!=null">
+              <span class="text-success" style="font-size: 20px">Uploading {{successMessage}}</span>
+           
+          </div>
+
+          </form>
+        </div>
+
+        <!-- Reviewer Section-->
+        <div class="col-md-3 col-md-offset-1">
+          <table class="table table-responsive" style="background-color:rgb(245, 222, 179,0.5);border-radius:5px">
+            <thead>
+              <tr  style="color:black">
+                <th>
+                  QpId
+                </th>
+                <th>
+                  *Remarks
+                </th>
+                <th>
+                  Reviewed Date
+                </th>
+              </tr>
+            </thead>
+           
+              <tbody *ngFor="let i of qpData1">
+                <tr style="color:rgb(11, 27, 41)" *ngIf="i.remarks!=null">
+                  <!--Using loop access the remarks given by the Reviewer and display in the td section-->
+                  <td>
+                      {{i.qpId}}
+                  </td>
+                  <td>
+                      {{i.remarks}}
+                  </td>
+                  <td>
+                    {{i.reviewedDate|date:'longDate'}}
+                  </td>
+                </tr>
+                <tr *ngIf="!qpData1 || qpData1.length==0">
+                    <td colspan="3">No Remarks</td>
+                </tr> 
+              </tbody>
+            
+            
+          </table>
+        </div>
+       
+          
+      </div>
+      
+      <div class="row allign" style="height:80vh;width:30%;margin-top:-22%">
+          
+      </div>
+  
+  
+  </div>
+
+
+
+  

@@ -1,0 +1,13 @@
+Your global Angular CLI version (1.3.2) is greater than your local
+version (1.2.7). The local Angular CLI version is used.
+
+To disable this warning use "ng set --global warnings.versionMismatch=false".
+[32m06 12 2017 09:34:48.452:INFO [karma]: [39mKarma v1.7.1 server started at http://0.0.0.0:9876/
+[32m06 12 2017 09:34:48.455:INFO [launcher]: [39mLaunching browser Chrome with unlimited concurrency
+[32m06 12 2017 09:34:48.462:INFO [launcher]: [39mStarting browser Chrome
+[33m06 12 2017 09:35:48.469:WARN [launcher]: [39mChrome have not captured in 60000 ms, killing.
+[32m06 12 2017 09:35:51.506:INFO [launcher]: [39mTrying to start Chrome again (1/2).
+[33m06 12 2017 09:35:51.508:WARN [temp-dir]: [39mFailed to create a temp dir at C:\Users\raja.nambialil\AppData\Local\Temp\karma-64759662
+[33m06 12 2017 09:36:51.512:WARN [launcher]: [39mChrome have not captured in 60000 ms, killing.
+[32m06 12 2017 09:36:54.590:INFO [launcher]: [39mTrying to start Chrome again (2/2).
+Terminate batch job (Y/N)? 

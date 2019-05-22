@@ -1,0 +1,10 @@
+.align{
+    float: left;
+}
+.align1{
+    float:right;
+}
+.container-fluid{
+    padding-right:-15px;
+    padding-left:-15px;
+}

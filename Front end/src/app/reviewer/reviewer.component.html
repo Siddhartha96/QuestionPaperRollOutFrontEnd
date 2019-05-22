@@ -1,0 +1,132 @@
+
+
+  <div class="container-fluid bg" style="">
+    <!-- sort and search -->
+    <!-- <div class="row" style="margin:30px 0 10px 10%;" >
+      <form action="" class="form-group">
+        
+          <div class="col-md-2 col-md-offset-1">
+              <input type="text" class="form-control" placeholder="SEARCH">
+          </div>
+      </form>
+     
+    </div> -->
+
+    <!--Display Qp details in tabular format  -->
+
+    
+
+    <div class="row" style="margin-top:80px;">     
+
+      <div class="col-md-3 col-md-offset-1">
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+          <table class="table table-responsive" style="color:rgb(11, 27, 41);background-color:rgb(245, 222, 179,0.5);border-radius:5px; margin-left:5px">
+            <thead>
+              <div class="input-group" style="margin:3px;width:130%">
+               
+                <input type="hidden" name="search_param" value="all" id="search_param">         
+                <input type="text" class="form-control" name="x" placeholder="Search term...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+            </thead>
+            <thead>
+                <tr>
+                    <th>QPID</th>
+                    <th>QPNAME</th>
+                  
+                </tr>
+              </thead>     
+              <tbody>
+                
+                <tr *ngFor="let i of qpData1">
+                  <td><button type="submit" class="btn btn-link" style="color:rgb(11, 27, 41);" (click)="show(i)">{{i.qpId}}</button></td>
+                  <td>{{i.qpName}}</td>
+                </tr>
+                <tr *ngIf="!qpData1 || qpData1.length==0">
+                    <td colspan="2">No Files Found</td>
+                </tr>  
+              </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!--Download and Upload-->
+      <div *ngIf="showdetails" class="col-md-3 col-md-offset-1"  style="color:rgb(11, 27, 41);background-color:rgb(245, 222, 179,0.5);border-radius:5px;padding:20px 20px 30px 20px">
+        <label for="">QP ID:</label>{{qpData2.qpId}}
+        <br>
+        <label for="">QP Name:</label>{{qpData2.qpName}}
+        
+        <br>
+        <button type="button" class="btn btn-primary btn-sm" (click)="download_qp(qpData2.qpId)">
+            <span class="glyphicon glyphicon-download-alt" ></span> Download
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="showUploadForm(qpData2.qpId)">
+          <span class="glyphicon glyphicon-upload"></span> Upload
+    </button>
+        <button type="button" class="btn btn-primary btn-sm"  (click)="readyToRollOutStatus(qpData2.qpId)">
+          <span class="glyphicon glyphicon-upload"></span>Ready To RollOut
+      </button>
+      <div *ngIf="errorMessage2!=null">
+          <span class="text-danger">{{errorMessage2}}</span>
+        </div>
+      <div *ngIf="successMessage2!=null">
+          <span class="text-success" style="font-size: 20px">Successfully sent to ETA</span>
+       
+      </div>
+
+      </div>
+      
+      <!-- Update Existing Qp -->
+      <div *ngIf="uploadQpForm" class="col-md-3 col-md-offset-1"  style="color:rgb(11, 27, 41);background-color:rgb(245, 222, 179,0.5);border-radius:5px;padding:20px 20px 30px 20px">
+        <form [formGroup]="updateForm" class="form-group">
+          <label for="">QpId</label>
+          <input type="text"class="form-control" formControlName="qpId" disabled>
+         
+          <input type="file" class="form-control alig" formControlName="path">
+          <button type="button" class="btn btn-primary btn-sm alig" style="margin-left:35%" (click)='updateQp(qppId)'>
+            <span class="glyphicon glyphicon-upload"></span> Upload
+      </button>
+      <br> <div *ngIf="errorMessage1!=null">
+          <span class="text-danger">{{errorMessage1}}</span>
+        </div>
+      <div *ngIf="successMessage1!=null">
+          <span class="text-success" style="font-size: 20px">{{successMessage1}}</span>
+       
+      </div>
+        </form>
+      </div>
+
+      <!-- Reviewer Section-->
+     
+      <div class="col-md-3 col-md-offset-1" >
+        <form class="form-group" [formGroup]="remarks"style="background-color:rgb(245, 222, 179,0.5);border-radius:5px;padding:20px 20px 20px 20px" (ngSubmit)="setRemarks()">
+          <label for="">QpId</label>
+          <select name="" id="" formControlName="qpId" class="form-control" >
+            <option value="">---Select QpId---</option>
+            <option *ngFor="let qpid of qpData1">{{qpid.qpId}}</option>
+          </select>
+         <br>
+          <label for="">Remarks</label>
+          <!-- <textarea name="" id="" class="form-control" formControlName="desc" placeholder="Remarks...." cols="30" rows="2"></textarea> -->
+          <input type="text" class="form-control" formControlName="remarks" placeholder="Remarks....">
+          <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <br> <div *ngIf="errorMessage!=null">
+            <span class="text-danger">{{errorMessage}}</span>
+          </div>
+          <div *ngIf="successMessage!=null">
+              <span class="text-success" style="font-size: 20px">{{successMessage}}</span>
+           
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    
+
+</div>
+
+
+
